@@ -40,10 +40,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fredoka.variable} ${nunito.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="flex min-h-dvh flex-col font-sans antialiased">
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <ClerkProvider appearance={appearance}>
           <Header />
           <main className="flex-1">{children}</main>
