@@ -457,3 +457,18 @@ h3,
     transition: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Clerk "Manage account" modal: a constant size, so switching between Profile,
+   Security, etc. never makes the window jump. Content scrolls inside it.
+   --------------------------------------------------------------------------- */
+.cl-modalContent .cl-cardBox {
+  width: 56rem !important;
+  max-width: calc(100vw - 2rem) !important;
+  height: 44rem !important;
+  max-height: calc(100dvh - 2rem) !important;
+}
+.cl-modalContent .cl-scrollBox,
+.cl-modalContent .cl-pageScrollBox {
+  overflow-y: auto;
+}
