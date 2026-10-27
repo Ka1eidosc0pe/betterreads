@@ -1,26 +1,459 @@
 @import "tailwindcss";
 
+/* Dark mode is driven by <html data-theme="dark"> (see ThemeScript). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------------
+   BetterReads design tokens.
+   Light  = "Sunlit Hall"   — the COEX library at noon: honey wood, cream walls.
+   Dark   = "Starfield Night" — the same hall after dark: indigo, lamps aglow.
+   --------------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --paper: #fff5e1;
+  --paper-2: #ffe3b8;
+  --card: #fffdf7;
+  --card-2: #fff0d4;
+  --ink: #3a2748;
+  --ink-soft: #6b5780;
+  --edge: #e8c998;
+  --edge-strong: #d3a869;
+
+  --primary: #ff6f59;
+  --primary-edge: #d4452f;
+  --teal: #22b3a3;
+  --teal-edge: #137a6d;
+  --sun: #ffc53d;
+  --sun-edge: #d0900f;
+  --plum: #8a63d2;
+  --plum-edge: #5f3fa3;
+  --leaf: #6cc070;
+  --leaf-edge: #388d43;
+
+  --wood: #cf9060;
+  --wood-dark: #96592f;
+  --wood-light: #e8b784;
+
+  --glow: 255 197 80;
+  --glow-strength: 0.28;
+  --star-opacity: 0;
+
+  --spine-1: #ff6f59;
+  --spine-2: #ffc53d;
+  --spine-3: #22b3a3;
+  --spine-4: #8a63d2;
+  --spine-5: #6cc070;
+  --spine-6: #5db7f0;
+  --spine-7: #ff9fb5;
+  --spine-8: #f6e7c8;
+  --spine-9: #c4533b;
+
+  --hall-wall-top: #ffeacb;
+  --hall-wall-bottom: #ffd9a0;
+  --hall-shelf-back: #c27a4d;
+  --hall-floor: #e9a96b;
+  --sky-top: #bfe6ff;
+  --sky-bottom: #fff0c9;
+
+  --shadow-soft: 0 18px 40px -18px rgb(120 70 30 / 0.35);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #181330;
+  --paper-2: #2a2058;
+  --card: #2a2350;
+  --card-2: #352c66;
+  --ink: #fff0da;
+  --ink-soft: #c1b4e3;
+  --edge: #120d28;
+  --edge-strong: #0b0719;
+
+  --primary: #ff8466;
+  --primary-edge: #b9422d;
+  --teal: #43d1c0;
+  --teal-edge: #16786d;
+  --sun: #ffcb55;
+  --sun-edge: #b27a0c;
+  --plum: #b39bff;
+  --plum-edge: #6a4bc0;
+  --leaf: #82d98a;
+  --leaf-edge: #2f7c3a;
+
+  --wood: #9a5f3a;
+  --wood-dark: #5c3319;
+  --wood-light: #b97a4d;
+
+  --glow: 255 184 77;
+  --glow-strength: 0.7;
+  --star-opacity: 1;
+
+  --spine-1: #ff7f68;
+  --spine-2: #ffcb55;
+  --spine-3: #3fc7b7;
+  --spine-4: #a98cff;
+  --spine-5: #7ad282;
+  --spine-6: #6cbcf0;
+  --spine-7: #ff9bb8;
+  --spine-8: #e9d9b8;
+  --spine-9: #d9604a;
+
+  --hall-wall-top: #231b4b;
+  --hall-wall-bottom: #3a2c72;
+  --hall-shelf-back: #3a2352;
+  --hall-floor: #5b3a52;
+  --sky-top: #0e0a29;
+  --sky-bottom: #3d2f80;
+
+  --shadow-soft: 0 18px 40px -18px rgb(0 0 0 / 0.7);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-edge: var(--edge);
+  --color-edge-strong: var(--edge-strong);
+  --color-primary: var(--primary);
+  --color-primary-edge: var(--primary-edge);
+  --color-teal: var(--teal);
+  --color-teal-edge: var(--teal-edge);
+  --color-sun: var(--sun);
+  --color-sun-edge: var(--sun-edge);
+  --color-plum: var(--plum);
+  --color-plum-edge: var(--plum-edge);
+  --color-leaf: var(--leaf);
+  --color-leaf-edge: var(--leaf-edge);
+  --color-wood: var(--wood);
+  --color-wood-dark: var(--wood-dark);
+  --color-wood-light: var(--wood-light);
+
+  --font-display: var(--font-fredoka), ui-rounded, "Hiragino Maru Gothic ProN",
+    system-ui, sans-serif;
+  --font-sans: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+
+  --radius-toy: 1.75rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--paper);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(
+      900px 520px at 85% -10%,
+      rgb(var(--glow) / var(--glow-strength)),
+      transparent 70%
+    ),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  background-attachment: fixed;
+  transition: color 0.3s ease;
+}
+
+/* Starfield: only visible at night. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--star-opacity);
+  transition: opacity 0.5s ease;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff8, transparent 60%),
+    radial-gradient(1px 1px at 32% 8%, #fff9, transparent 60%),
+    radial-gradient(2px 2px at 58% 22%, #ffe9b8aa, transparent 60%),
+    radial-gradient(1px 1px at 76% 12%, #fff9, transparent 60%),
+    radial-gradient(1.5px 1.5px at 90% 30%, #fff8, transparent 60%),
+    radial-gradient(1px 1px at 22% 44%, #fff7, transparent 60%),
+    radial-gradient(1.5px 1.5px at 66% 52%, #fff7, transparent 60%),
+    radial-gradient(1px 1px at 8% 70%, #fff7, transparent 60%),
+    radial-gradient(2px 2px at 44% 78%, #ffe9b899, transparent 60%),
+    radial-gradient(1px 1px at 84% 84%, #fff7, transparent 60%);
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.005em;
+}
+
+::selection {
+  background: var(--sun);
+  color: #3a2748;
+}
+
+:focus-visible {
+  outline: 3px solid var(--plum);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Toy-box components: chunky borders + a solid "pillow" shadow underneath.
+   --------------------------------------------------------------------------- */
+.card {
+  background: var(--card);
+  border: 2.5px solid var(--edge);
+  border-radius: var(--radius-toy);
+  box-shadow:
+    0 6px 0 var(--edge),
+    var(--shadow-soft);
+}
+
+.card-flat {
+  background: var(--card);
+  border: 2.5px solid var(--edge);
+  border-radius: 1.25rem;
+}
+
+.btn {
+  --btn-bg: var(--card-2);
+  --btn-edge: var(--edge-strong);
+  --btn-fg: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  border: 2.5px solid var(--btn-edge);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--btn-edge);
+  transform: translateY(0);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0 var(--btn-edge);
+}
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--btn-edge);
+}
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-primary {
+  --btn-bg: var(--primary);
+  --btn-edge: var(--primary-edge);
+  --btn-fg: #fff;
+}
+.btn-teal {
+  --btn-bg: var(--teal);
+  --btn-edge: var(--teal-edge);
+  --btn-fg: #052d29;
+}
+.btn-sun {
+  --btn-bg: var(--sun);
+  --btn-edge: var(--sun-edge);
+  --btn-fg: #4a2f00;
+}
+.btn-plum {
+  --btn-bg: var(--plum);
+  --btn-edge: var(--plum-edge);
+  --btn-fg: #fff;
+}
+[data-theme="dark"] .btn-plum {
+  --btn-fg: #1d1240;
+}
+.btn-sm {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 0 var(--btn-edge);
+}
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-edge: transparent;
+  box-shadow: none;
+  border-color: transparent;
+}
+.btn-ghost:hover {
+  background: var(--card-2);
+  transform: none;
+  box-shadow: none;
+}
+
+.field {
+  width: 100%;
+  background: var(--card);
+  color: var(--ink);
+  border: 2.5px solid var(--edge-strong);
+  border-radius: 1.1rem;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: inset 0 3px 0 rgb(0 0 0 / 0.05);
+}
+.field::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.75;
+  font-weight: 500;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--plum);
+  box-shadow: 0 0 0 4px rgb(138 99 210 / 0.25);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  background: var(--card-2);
+  border: 2px solid var(--edge);
+  color: var(--ink-soft);
+}
+
+/* A wooden ledge a book "stands" on. */
+.plank {
+  position: relative;
+}
+.plank::after {
+  content: "";
+  position: absolute;
+  left: -0.9rem;
+  right: -0.9rem;
+  bottom: -1.05rem;
+  height: 0.95rem;
+  border-radius: 0.35rem 0.35rem 0.6rem 0.6rem;
+  background: linear-gradient(
+    180deg,
+    var(--wood-light) 0%,
+    var(--wood) 45%,
+    var(--wood-dark) 100%
+  );
+  box-shadow: 0 8px 12px -6px rgb(0 0 0 / 0.35);
+  z-index: -1;
+}
+
+/* Skeleton shimmer (used by designed loading states). */
+.skeleton {
+  background: linear-gradient(
+    100deg,
+    var(--card-2) 30%,
+    var(--card) 50%,
+    var(--card-2) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 1rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion — all of it switched off for people who ask.
+   --------------------------------------------------------------------------- */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(calc(var(--r, 0deg) + 3deg));
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-1.6deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+}
+@keyframes twinkle {
+  from {
+    filter: brightness(0.75);
+  }
+  to {
+    filter: brightness(1.25);
+  }
+}
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+.float {
+  animation: float 5s ease-in-out infinite;
+}
+.sway {
+  transform-origin: 50% 0;
+  animation: sway 6s ease-in-out infinite;
+}
+.pop-in {
+  animation: pop 0.35s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+}
+.blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
