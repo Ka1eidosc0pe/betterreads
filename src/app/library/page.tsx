@@ -116,6 +116,8 @@ export default async function LibraryPage({ searchParams }: PageProps<"/library"
                 coverId={e.cover_id}
                 year={e.first_publish_year}
                 progress={progressOf(e)}
+                progressLabel={e.status === "reading" && !e.page_count ? `On page ${e.progress_page}` : undefined}
+                reserveProgress={active === "reading"}
                 badge={e.status === "finished" && e.rating ? <RatingBadge rating={e.rating} /> : undefined}
               />
             ))}
