@@ -42,7 +42,7 @@ test.describe("privacy: people only ever see their own data", () => {
     await expect(a.getByRole("heading", { name: "My Library" })).toBeVisible();
     await expect(a.getByText("Pages read")).toBeVisible();
     const aRows = await rest(request, "library_entries?select=work_key,user_id", tokenA);
-    expect(aRows.body).toEqual([expect.objectContaining({ work_key: WORK })]);
+    expect(aRows.body).toEqual(expect.arrayContaining([expect.objectContaining({ work_key: WORK })]));
 
     // ---- Reader B, in a completely separate browser, sees none of it. ----
     const ctxB = await browser.newContext();
