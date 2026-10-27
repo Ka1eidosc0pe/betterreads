@@ -4,6 +4,8 @@ Goodreads, but cozier. Search millions of books, bookmark what you want to read,
 session, and rate what you finish, in a storybook-style library inspired by Seoul's COEX Starfield
 Library, with light and dark modes.
 
+**Live:** https://betterreads-three.vercel.app (Clerk *development* keys, so sign-up is open to anyone with an email address)
+
 **Stack:** Next.js 16 (App Router) · Tailwind CSS 4 · Clerk (auth) · Supabase (Postgres + RLS) ·
 Open Library API · Playwright · Vercel
 
