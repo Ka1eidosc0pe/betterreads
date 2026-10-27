@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Bookie } from "@/components/art/Bookie";
 import { BookCover } from "@/components/BookCover";
 import { BookTile } from "@/components/BookTile";
 import { ShelfEmpty } from "@/components/states";
@@ -156,11 +155,6 @@ export default async function LibraryPage({ searchParams }: PageProps<"/library"
         </section>
       )}
 
-      {entries.length === 0 && (
-        <div className="mt-10 flex justify-center">
-          <Bookie mood="cheer" size={120} className="float" />
-        </div>
-      )}
     </div>
   );
 }
