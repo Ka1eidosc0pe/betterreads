@@ -46,3 +46,16 @@ export const userButtonAppearance: Appearance = {
     avatarBox: "!size-9 !border-[2.5px] !border-[var(--edge-strong)]",
   },
 };
+
+/**
+ * Clerk rejects passwords found in known data breaches (Have I Been Pwned). That's
+ * intended, but its default message doesn't say what to do next, so say it.
+ */
+export const localization: ComponentProps<typeof ClerkProvider>["localization"] = {
+  unstable__errors: {
+    form_password_pwned:
+      "That password has shown up in a known data breach, so we can't accept it. Try a longer passphrase, such as three or four unrelated words, or continue with Google.",
+    form_password_pwned__sign_in:
+      "That password has shown up in a known data breach. Please reset it using “Forgot password” or continue with Google.",
+  },
+};
