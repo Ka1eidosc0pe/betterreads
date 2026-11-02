@@ -30,6 +30,7 @@
   --plum-edge: #5f3fa3;
   --leaf: #6cc070;
   --leaf-edge: #388d43;
+  --danger: #c8283a;
 
   --wood: #cf9060;
   --wood-dark: #96592f;
@@ -81,6 +82,7 @@
   --plum-edge: #6a4bc0;
   --leaf: #82d98a;
   --leaf-edge: #2f7c3a;
+  --danger: #ff8d92;
 
   --wood: #9a5f3a;
   --wood-dark: #5c3319;
@@ -471,4 +473,15 @@ h3,
 .cl-modalContent .cl-scrollBox,
 .cl-modalContent .cl-pageScrollBox {
   overflow-y: auto;
+}
+
+/* Clerk form errors: unmistakably an error, and never next to a contradicting
+   "meets all requirements" line. */
+.cl-formFieldErrorText,
+.cl-formFieldErrorText * {
+  color: var(--danger) !important;
+  font-weight: 700;
+}
+.cl-formField:has(.cl-formFieldErrorText) .cl-formFieldSuccessText {
+  display: none;
 }

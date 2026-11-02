@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import { Header } from "@/components/Header";
 import { themeScript } from "@/components/ThemeToggle";
-import { appearance } from "@/lib/clerk-appearance";
+import { appearance, localization } from "@/lib/clerk-appearance";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-dvh flex-col font-sans antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <ClerkProvider appearance={appearance}>
+        <ClerkProvider appearance={appearance} localization={localization}>
           <Header />
           <main className="flex-1">{children}</main>
           <footer className="px-6 py-10 text-center text-sm font-semibold text-ink-soft">

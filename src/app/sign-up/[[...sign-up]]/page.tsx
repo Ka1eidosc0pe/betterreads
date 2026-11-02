@@ -10,6 +10,11 @@ export default function SignUpPage() {
     <div className="mx-auto flex max-w-md flex-col items-center px-4 py-10">
       <Bookie mood="cheer" size={110} className="float -mb-2" />
       <SignUp appearance={authCardAppearance} />
+      <p className="mt-5 max-w-sm text-center text-sm font-semibold text-ink-soft">
+        Tip: for your safety, passwords that have appeared in known data breaches are
+        rejected. A passphrase of three or four unrelated words works well, or just
+        continue with Google.
+      </p>
     </div>
   );
 }
